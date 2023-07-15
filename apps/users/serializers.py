@@ -98,3 +98,13 @@ class SignUpSerilaizer(serializers.ModelSerializer):
         data = super(SignUpSerilaizer, self).to_representation(instance)
         data.update(instance.token())
         return data
+    
+
+
+#     {
+#     "first_name": "someonefirts",
+#     "last_name": "someonelast",
+#     "username": "someoneuser",
+#     "email": "someone@some.come",
+#     "password": "Jidwjidnwd"
+# }

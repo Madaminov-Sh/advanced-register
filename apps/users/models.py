@@ -110,7 +110,7 @@ class UserConfirmation(BaseModel):
     )
     auth_status = models.CharField(max_length=25, choices=AUTH_STATUS_CHOICE, default=CODE_FERIFED)
     code = models.CharField(max_length=4) 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='verify_codes')
     expiration_time = models.DateTimeField(null=True)
     is_comfirmed = models.BooleanField(default=False)
 

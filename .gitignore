@@ -2,4 +2,4 @@
 .env
 venv
 migrations
-db.sqlite.3
+.gitignore
