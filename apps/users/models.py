@@ -41,8 +41,6 @@ class User(AbstractUser, BaseModel):
     photo = models.ImageField(upload_to='user_photo', null=True, blank=True, validators=[FileExtensionValidator(
         allowed_extensions=['img', 'jpg', 'jpeg', 'heic', 'heif']
     )])
-    # password = models.CharField(max_length=25, unique=False)
-    # confirm_password = models.CharField(max_length=25, unique=False)
 
     def __str__(self):
         return str(self.username)
