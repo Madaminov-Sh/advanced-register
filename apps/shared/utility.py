@@ -7,11 +7,11 @@ from django.template.loader import render_to_string
 from rest_framework import exceptions
 
 
-regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"
-
+email_regex = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b")
+username_regex = re.compile(r"^(?!.*[_.]{2,})(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9_.]+$")
 
 def check_emter_email(email):
-    if re.fullmatch(regex, email):
+    if re.fullmatch(email_regex, email):
         email = 'email'
     else:
         raise exceptions.ValidationError(
@@ -21,6 +21,21 @@ def check_emter_email(email):
             }
         )
     return email
+
+    # foydalanuvchi login turini aniqlash
+def check_login_type(user_input):
+    if re.fullmatch(email_regex, user_input):
+        user_input = 'email'
+    elif re.fullmatch(username_regex, user_input):
+        user_input = 'username'
+    else:
+        raise exceptions.ValidationError(
+            {
+                "success": False,
+                "message": f"'{user_input}' to'g'rilini tekshiring"
+            }
+        )
+    return user_input
 
 
 class EamilThread(threading.Thread):

@@ -1,4 +1,3 @@
-from typing import Iterable, Optional
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator   
@@ -14,7 +13,7 @@ import datetime
     # Foydalanuvchi statuslari
 ORDINARY, MANAGER, ADMIN = ('ordinary', 'manager','admin')
     # foydalanuvchi authenticate statuslari
-NEW, CODE_FERIFED, DONE, PHOTO_DONE = ('new', 'code_verifed', 'done', 'photo_done')
+NEW, CODE_FERIFED, ALL_DONE = ('new', 'code_verifed', 'all_done')
 
 
 class User(AbstractUser, BaseModel):
@@ -33,8 +32,7 @@ class User(AbstractUser, BaseModel):
     AUTH_STATUS_CHOICE = (
         (NEW, NEW),
         (CODE_FERIFED, CODE_FERIFED),
-        (DONE, DONE),
-        (PHOTO_DONE, PHOTO_DONE)
+        (ALL_DONE, ALL_DONE)
     )
 
     user_status = models.CharField(max_length=25, choices=USER_STATUS_CHOICE, default=ORDINARY)
@@ -105,9 +103,8 @@ class UserConfirmation(BaseModel):
     AUTH_STATUS_CHOICE = (
         (NEW, NEW),
         (CODE_FERIFED, CODE_FERIFED),
-        (DONE, DONE),
-        (PHOTO_DONE, PHOTO_DONE)
-    )
+        (ALL_DONE, ALL_DONE)
+    )       
     auth_status = models.CharField(max_length=25, choices=AUTH_STATUS_CHOICE, default=CODE_FERIFED)
     code = models.CharField(max_length=4) 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='verify_codes')

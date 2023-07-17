@@ -1,5 +1,9 @@
 .idea
 .env
 venv
-migrations
+*_initial.py
+*.py
 .gitignore
+
+*.jpg
+*.png
